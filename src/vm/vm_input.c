@@ -1,5 +1,5 @@
-#include "vm_input.h"
-#include "vm_log.h"
+#include "vm/vm_input.h"
+#include "vm/vm_log.h"
 #include <string.h>
 
 const int MAX_KEYS = SDL_NUM_SCANCODES;

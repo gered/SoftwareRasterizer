@@ -4,7 +4,7 @@
 extern "C" {
 #endif
 
-#include "vm_stdinc.h"
+#include "vm/vm_stdinc.h"
 #include "SDL.h"
 
 typedef struct {

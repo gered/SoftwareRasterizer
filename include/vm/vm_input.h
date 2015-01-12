@@ -4,8 +4,8 @@
 extern "C" {
 #endif
 
-#include "vm_stdinc.h"
-#include "vm_input_codes.h"
+#include "vm/vm_stdinc.h"
+#include "vm/vm_input_codes.h"
 #include "SDL.h"
 
 bool input_init();

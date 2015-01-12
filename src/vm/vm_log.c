@@ -1,4 +1,4 @@
-#include "vm_log.h"
+#include "vm/vm_log.h"
 
 #include <stdarg.h>
 #include <time.h>

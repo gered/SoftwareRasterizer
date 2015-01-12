@@ -1,6 +1,6 @@
-#include "vm_window.h"
-#include "vm_log.h"
-#include "vm_input.h"
+#include "vm/vm_window.h"
+#include "vm/vm_log.h"
+#include "vm/vm_input.h"
 #include "fbgfx/surface.h"
 
 static SDL_Texture*create_texture(SDL_Renderer *renderer, int width, int height) {
