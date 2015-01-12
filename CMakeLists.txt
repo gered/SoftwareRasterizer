@@ -18,3 +18,6 @@ include_directories(${SDL2_INCLUDE_DIR} "${ROOT_DIR}/include")
 
 add_executable("test_wm" "${TESTS_DIR}/test_wm.c" ${LIB_SRC_FILES})
 target_link_libraries("test_wm" ${SDL2_LIBRARY})
+
+add_executable("test_primitives" "${TESTS_DIR}/test_primitives.c" ${LIB_SRC_FILES})
+target_link_libraries("test_primitives" ${SDL2_LIBRARY})

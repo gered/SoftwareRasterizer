@@ -5,7 +5,7 @@
 int main(int argc, char **argv) {
 	log_init();
 	input_init();
-	WINDOW *window = window_init("Rasterizer Test", 1280, 960, 320, 240);
+	WINDOW *window = window_init("test_wm", 1024, 768, 320, 240);
 	if (!window)
 		return 1;
 
