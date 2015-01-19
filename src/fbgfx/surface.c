@@ -44,6 +44,13 @@ void surface_swap_framebuffers() {
 	*/
 }
 
+static uint32_t get_index(const SURFACE *surface, int x, int y) {
+	if (surface->flags & SURFACE_FLAGS_SIDEWAYS_BUFFER)
+		return (uint32_t)((x * surface->height) + (surface->height - y - 1)) * surface->bytes_per_pixel;
+	else
+		return (uint32_t)(x + (y * surface->width)) * surface->bytes_per_pixel;
+}
+
 void setup_initial_surface_properties(SURFACE *surface, int width, int height, SURFACE_FORMAT format, SURFACE_FLAGS flags) {
 	surface->width = width;
 	surface->height = height;
@@ -54,10 +61,11 @@ void setup_initial_surface_properties(SURFACE *surface, int width, int height, S
 
 	surface->clip_region = rect_create(0, 0, surface->width, surface->height);
 
-	// lazy calculation for the win
-	uint32_t reference_index = surface_get_index_of(surface, 0, 0);
-	surface->x_inc = surface_get_index_of(surface, 1, 0) - reference_index;
-	surface->y_inc = surface_get_index_of(surface, 0, 1) - reference_index;
+	// lazy calculations for the win
+	uint32_t reference_index = get_index(surface, 0, 0);
+	surface->top_left_index = reference_index;
+	surface->x_inc = get_index(surface, 1, 0) - reference_index;
+	surface->y_inc = get_index(surface, 0, 1) - reference_index;
 }
 
 SURFACE* surface_create(int width, int height, SURFACE_FORMAT format, SURFACE_FLAGS flags) {

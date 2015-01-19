@@ -27,6 +27,7 @@ typedef struct SURFACE {
 	int bytes_per_pixel;
 	int width;
 	int height;
+	uint32_t top_left_index;
 	int x_inc;
 	int y_inc;
 	RECT clip_region;
@@ -83,10 +84,7 @@ static inline uint32_t surface_get_buffer_size(const SURFACE *surface) {
 }
 
 static inline uint32_t surface_get_index_of(const SURFACE *surface, int x, int y) {
-	if (surface->flags & SURFACE_FLAGS_SIDEWAYS_BUFFER)
-		return (uint32_t)((x * surface->height) + (surface->height - y - 1)) * surface->bytes_per_pixel;
-	else
-		return (uint32_t)(x + (y * surface->width)) * surface->bytes_per_pixel;
+	return (uint32_t)(surface->top_left_index + (surface->x_inc * x) + (surface->y_inc * y));
 }
 
 static inline COLOR_COMPONENT* surface_get_pointer_to(const SURFACE *surface, int x, int y) {

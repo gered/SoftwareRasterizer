@@ -124,7 +124,38 @@ void test_coords_and_offsets(SURFACE_FLAGS flags) {
 	surface_destroy(surface);
 }
 
+void test_increments(SURFACE_FLAGS flags) {
+	SURFACE *surface = surface_create(1024, 1024, SURFACE_FORMAT_RGBA, flags);
+	assert(surface != NULL);
+
+	int x = 0;
+	int y = 0;
+	uint32_t index = surface_get_index_of(surface, x, y);
+
+	// this is a kind of silly test, but meh, a nice simple-ish validation
+	// over a wide range of possible coordinates
+
+	for (; y < surface->height; ++y) {
+		uint32_t temp = index;
+
+		for (; x < surface->width; ++x) {
+			uint32_t this_index = surface_get_index_of(surface, x, y);
+			assert(index == this_index);
+			index += surface->x_inc;
+		}
+
+		// because the previous x_inc increments make this unnecessary, but we want to test
+		// this increment too ...
+		index = temp;
+		index += surface->y_inc;
+	}
+
+	surface_destroy(surface);
+}
+
 int main(int argc, char **argv) {
+	test_increments(SURFACE_FLAGS_NONE);
+	test_increments(SURFACE_FLAGS_SIDEWAYS_BUFFER);
 	test_coords_and_offsets(SURFACE_FLAGS_NONE);
 	test_coords_and_offsets(SURFACE_FLAGS_SIDEWAYS_BUFFER);
 	test_rgba(SURFACE_FLAGS_NONE);
