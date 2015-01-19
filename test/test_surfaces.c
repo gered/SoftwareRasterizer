@@ -79,7 +79,11 @@ void test_coords_and_offsets(SURFACE_FLAGS flags) {
 	COLOR color = color_create_rgba(0, 255, 0, 255);
 	int x = 3;
 	int y = 42;
-	uint32_t index = (surface->x_inc * 3) + (surface->y_inc * 42);
+	// NOTE: due to the way that surfaces created with SURFACE_FLAGS_SIDEWAYS_BUFFER
+	//       after indexed, it is important to start off with a calculated index via
+	//       this function. then you can modify the index via x_inc and y_inc
+	//       (x = 0, y = 0 is _not_ equal to index = 0 in a sideways buffer)
+	uint32_t index = surface_get_index_of(surface, x, y);
 
 	// testing first sets a pixel using x,y coordinates, then reads
 	// it back using an offset set to be equivalent to the x,y coords
@@ -122,9 +126,13 @@ void test_coords_and_offsets(SURFACE_FLAGS flags) {
 
 int main(int argc, char **argv) {
 	test_coords_and_offsets(SURFACE_FLAGS_NONE);
+	test_coords_and_offsets(SURFACE_FLAGS_SIDEWAYS_BUFFER);
 	test_rgba(SURFACE_FLAGS_NONE);
+	test_rgba(SURFACE_FLAGS_SIDEWAYS_BUFFER);
 	test_rgb(SURFACE_FLAGS_NONE);
+	test_rgb(SURFACE_FLAGS_SIDEWAYS_BUFFER);
 	test_alpha(SURFACE_FLAGS_NONE);
+	test_alpha(SURFACE_FLAGS_SIDEWAYS_BUFFER);
 
 	return 0;
 }
