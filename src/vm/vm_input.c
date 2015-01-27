@@ -10,8 +10,8 @@ struct {
 	bool locked_keys[MAX_KEYS];
 	bool mouse_buttons[MAX_MOUSE_BUTTONS];
 	bool locked_mouse_buttons[MAX_MOUSE_BUTTONS];
-	uint mouse_x;
-	uint mouse_y;
+	unsigned int mouse_x;
+	unsigned int mouse_y;
 	int mouse_delta_x;
 	int mouse_delta_y;
 } input_state;
@@ -114,10 +114,10 @@ int input_get_mouse_delta_y() {
 	return input_state.mouse_delta_y;
 }
 
-uint input_get_mouse_x() {
+unsigned int input_get_mouse_x() {
 	return input_state.mouse_x;
 }
 
-uint input_get_mouse_y() {
+unsigned int input_get_mouse_y() {
 	return input_state.mouse_y;
 }

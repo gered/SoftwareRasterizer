@@ -22,8 +22,8 @@ bool input_is_mouse_button_pressed(MOUSE_BUTTONS button);
 void input_lock_mouse_button(MOUSE_BUTTONS button);
 int input_get_mouse_delta_x();
 int input_get_mouse_delta_y();
-uint input_get_mouse_x();
-uint input_get_mouse_y();
+unsigned int input_get_mouse_x();
+unsigned int input_get_mouse_y();
 
 #ifdef __cplusplus
 }
