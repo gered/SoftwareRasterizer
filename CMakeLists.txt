@@ -27,3 +27,6 @@ target_link_libraries("test_surfaces" ${SDL2_LIBRARY})
 
 add_executable("test_color_format" "${TESTS_DIR}/test_color_format.c" ${LIB_SRC_FILES})
 target_link_libraries("test_color_format" ${SDL2_LIBRARY})
+
+add_executable("test_blit" "${TESTS_DIR}/test_blit.c" ${LIB_SRC_FILES})
+target_link_libraries("test_blit" ${SDL2_LIBRARY})
